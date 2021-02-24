@@ -1,0 +1,21 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: pink; }
+
+.title {
+  text-align: center; }
+
+.newItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  border: 2px solid grey;
+  border-radius: 15px; }
+  .newItem__name, .newItem__sellIn, .newItem__quality, .newItem__submit {
+    margin: 5px;
+    padding: 5px; }
+
+/*# sourceMappingURL=style.css.map */

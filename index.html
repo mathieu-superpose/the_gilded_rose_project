@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GuildedRoseTHP</title>
+	<link rel="stylesheet" type="text/css" href="./src/css/style.css" />
+</head>
+<body>
+	<h1 class="title">The Guilded Rose THP</h1>
+	<form class="newItem">
+		<h2 class="newItem__title">Add item</h2>
+		<label>name<input class="newItem__name" type="text" name="name"></label>
+		<label>sellIn<input class="newItem__sellIn" type="number" name="sellIn"></label>
+		<label>quality<input class="newItem__quality" type="number" name="quality"></label>
+		<input class="newItem__submit" type="submit" value="Add Item">
+	</form>
+
+	<script src="./src/js/gilded_rose.js"></script>
+    <script>
+        const shop = new Shop();
+    </script>
+</body>
+</html>
