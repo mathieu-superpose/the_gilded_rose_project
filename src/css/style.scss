@@ -1,0 +1,28 @@
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: pink;
+}
+
+.title {
+	text-align: center;
+}	
+
+.newItem {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	width: 400px;
+	border: 2px solid grey;
+	border-radius: 15px;
+
+	&__name,
+	&__sellIn,
+	&__quality,
+	&__submit {
+		margin: 5px;
+		padding: 5px;
+	}
+}
