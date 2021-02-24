@@ -1,4 +1,4 @@
-const { Item, Sulfuras, AgedBrie } = require('../src/js/gilded_rose.js');
+const { Item, Sulfuras, AgedBrie, BackstagedPasses } = require('../src/js/gilded_rose.js');
 describe("GildedRose shop manager", function () {
   let listItems = [];
 
@@ -82,18 +82,55 @@ describe("GildedRose shop manager", function () {
     });
   });
 
-  // it("Augmenter la qualité de 1 pour Aged Brie", function () {
-  //   listItems.push(new AgedBrie("Aged Brie", 10, 50));
+  it("Augmenter la qualité de 1 pour Aged Brie, avec un plafont à 50", function () {
+    listItems.push(new AgedBrie("Aged Brie", 5, 20));
+    listItems.push(new AgedBrie("Aged Brie", 10, 50));
 
-  //   listItems[0].updateQuality();
+    listItems.forEach(item=>item.updateQuality());
 
-  //   const expected = [
-  //     { sellIn: 9, quality: 50 },
-  //   ];
-  //   expected.forEach(function (testCase, idx) {
-  //     expect(listItems[idx].quality).toBe(testCase.quality);
-  //     expect(listItems[idx].sellIn).toBe(testCase.sellIn);
-  //   });
-  // });
+    const expected = [
+      { sellIn: 4, quality: 21 },
+      { sellIn: 9, quality: 50 },
+    ];
+    expected.forEach(function (testCase, idx) {
+      expect(listItems[idx].quality).toBe(testCase.quality);
+      expect(listItems[idx].sellIn).toBe(testCase.sellIn);
+    });
+  });
+  it("Augmenter la qualité de 1 à plus de 10 jours, de 2 entre 5 et 10, de 3 entre 0 et 5, avec un plafont à 50, et faire tomber la qualité à 0 après le concert", function () {
+    listItems.push(new BackstagedPasses("Backstage passes to a TAFKAL80ETC concert", 20, 30));
+    listItems.push(new BackstagedPasses("Backstage passes to a TAFKAL80ETC concert", 9, 30));
+    listItems.push(new BackstagedPasses("Backstage passes to a TAFKAL80ETC concert", 4, 30));
+    listItems.push(new BackstagedPasses("Backstage passes to a TAFKAL80ETC concert", -1, 30));
+    listItems.push(new BackstagedPasses("Backstage passes to a TAFKAL80ETC concert", 9, 50));
 
+    listItems.forEach(item=>item.updateQuality());
+
+    const expected = [
+      { sellIn: 19, quality: 31 },
+      { sellIn: 8, quality: 32 },
+      { sellIn: 3, quality: 33 },
+      { sellIn: -2, quality: 0 },
+      { sellIn: 8, quality: 50 },
+    ];
+    expected.forEach(function (testCase, idx) {
+      expect(listItems[idx].quality).toBe(testCase.quality);
+      expect(listItems[idx].sellIn).toBe(testCase.sellIn);
+    });
+  });
+  it("Les Items Conjured se dégradent deux fois plus vite", function () {
+    listItems.push(new Item("Conjured +5 Dexterity Vest", 10, 20));
+    listItems.push(new Item("Conjured Mana Cake", -1, 6));
+
+    listItems.forEach(item=>item.updateQuality());
+
+    const expected = [
+      { sellIn: 9, quality: 18 },
+      { sellIn: -2, quality: 2 }
+    ];
+    expected.forEach(function (testCase, idx) {
+      expect(listItems[idx].quality).toBe(testCase.quality);
+      expect(listItems[idx].sellIn).toBe(testCase.sellIn);
+    });
+  });
 });
