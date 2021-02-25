@@ -1,1 +1,1 @@
-# the_guilded_rose_project
+# the_gilded_rose_project
